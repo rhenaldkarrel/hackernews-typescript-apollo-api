@@ -18,6 +18,7 @@
   ],
   "rules": {
     "semi": "error",
-    "comma-dangle": "off"
+    "comma-dangle": "off",
+    "quotes":"error"
   }
 }
