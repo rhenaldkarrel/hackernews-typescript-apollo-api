@@ -1,4 +1,5 @@
-import { objectType, extendType } from "nexus";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { objectType, extendType, nonNull, stringArg, intArg } from "nexus";
 import { NexusGenObjects } from "../../nexus-typegen";
 
 export const Link = objectType({
@@ -30,6 +31,32 @@ export const LinkQuery = extendType({
       type: "Link",
       resolve(parent, args, context, info) {
         return links;
+      },
+    });
+  },
+});
+
+export const LinkMutation = extendType({
+  type: "Mutation",
+  definition(t) {
+    t.nonNull.field("post", {
+      type: "Link",
+      args: {
+        description: nonNull(stringArg()),
+        url: nonNull(stringArg()),
+      },
+      resolve(parent, args, context) {
+        const { description, url } = args;
+
+        const idCount = links.length + 1;
+        const link = {
+          url,
+          description,
+          id: idCount,
+        };
+
+        links.push(link);
+        return link;
       },
     });
   },
