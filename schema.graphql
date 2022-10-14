@@ -12,12 +12,14 @@ type Link {
   id: Int!
   postedBy: User
   url: String!
+  voters: [User!]!
 }
 
 type Mutation {
   login(email: String!, password: String!): AuthPayload!
   post(description: String!, url: String!): Link!
   signup(email: String!, name: String!, password: String!): AuthPayload!
+  vote(linkId: Int!): Vote
 }
 
 type Query {
@@ -29,4 +31,10 @@ type User {
   id: Int!
   links: [Link!]!
   name: String!
+  votes: [Link!]!
+}
+
+type Vote {
+  link: Link!
+  user: User!
 }
