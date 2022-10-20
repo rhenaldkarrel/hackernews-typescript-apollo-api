@@ -12,7 +12,10 @@
     "prettier": "prettier ./src --check",
     "prettier:fix": "yarn prettier -- --write",
     "format": "yarn prettier:fix && yarn lint:fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "migrate:deploy": "prisma migrate deploy",
+    "build": "prisma generate && npm run generate && tsc",
+    "start": "node dist/src/index.js"
   },
   "keywords": [],
   "author": "",
